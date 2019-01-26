@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.lajijson.mblog.article.dao.ArticleInfoMapper" >
+  <resultMap id="BaseResultMap" type="top.lajijson.mblog.article.entity.ArticleInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="article_type_id" property="articleTypeId" jdbcType="INTEGER" />
+    <result column="read_volume" property="readVolume" jdbcType="INTEGER" />
+    <result column="comment_volume" property="commentVolume" jdbcType="INTEGER" />
+    <result column="synopsis" property="synopsis" jdbcType="VARCHAR" />
+    <result column="cover_img" property="coverImg" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, article_type_id, read_volume, comment_volume, synopsis, cover_img, status, 
+    sort, update_time, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from article_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from article_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="top.lajijson.mblog.article.entity.ArticleInfo" >
+    insert into article_info (id, title, article_type_id, 
+      read_volume, comment_volume, synopsis, 
+      cover_img, status, sort, 
+      update_time, create_time)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{articleTypeId,jdbcType=INTEGER}, 
+      #{readVolume,jdbcType=INTEGER}, #{commentVolume,jdbcType=INTEGER}, #{synopsis,jdbcType=VARCHAR}, 
+      #{coverImg,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, #{sort,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="top.lajijson.mblog.article.entity.ArticleInfo" >
+    insert into article_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="articleTypeId != null" >
+        article_type_id,
+      </if>
+      <if test="readVolume != null" >
+        read_volume,
+      </if>
+      <if test="commentVolume != null" >
+        comment_volume,
+      </if>
+      <if test="synopsis != null" >
+        synopsis,
+      </if>
+      <if test="coverImg != null" >
+        cover_img,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTypeId != null" >
+        #{articleTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="readVolume != null" >
+        #{readVolume,jdbcType=INTEGER},
+      </if>
+      <if test="commentVolume != null" >
+        #{commentVolume,jdbcType=INTEGER},
+      </if>
+      <if test="synopsis != null" >
+        #{synopsis,jdbcType=VARCHAR},
+      </if>
+      <if test="coverImg != null" >
+        #{coverImg,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="top.lajijson.mblog.article.entity.ArticleInfo" >
+    update article_info
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTypeId != null" >
+        article_type_id = #{articleTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="readVolume != null" >
+        read_volume = #{readVolume,jdbcType=INTEGER},
+      </if>
+      <if test="commentVolume != null" >
+        comment_volume = #{commentVolume,jdbcType=INTEGER},
+      </if>
+      <if test="synopsis != null" >
+        synopsis = #{synopsis,jdbcType=VARCHAR},
+      </if>
+      <if test="coverImg != null" >
+        cover_img = #{coverImg,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.lajijson.mblog.article.entity.ArticleInfo" >
+    update article_info
+    set title = #{title,jdbcType=VARCHAR},
+      article_type_id = #{articleTypeId,jdbcType=INTEGER},
+      read_volume = #{readVolume,jdbcType=INTEGER},
+      comment_volume = #{commentVolume,jdbcType=INTEGER},
+      synopsis = #{synopsis,jdbcType=VARCHAR},
+      cover_img = #{coverImg,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      sort = #{sort,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

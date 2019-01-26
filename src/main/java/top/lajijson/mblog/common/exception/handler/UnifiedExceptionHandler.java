@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import top.lajijson.mblog.common.util.Result;
+import top.lajijson.mblog.common.entity.Result;
 
 /**
  * 统一异常处理

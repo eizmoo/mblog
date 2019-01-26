@@ -1,4 +1,4 @@
-package top.lajijson.mblog.common.constant.enums;
+package top.lajijson.mblog.common.enums;
 
 /**
  * 返回结果枚举类
@@ -11,7 +11,15 @@ public enum ResultEnum {
      */
     SUCCESS(200, "访问成功"),
 
+    /**
+     * 未知异常
+     */
     FAIL(500,"未知异常"),
+
+    /**
+     * 账号已注册
+     */
+    ACCOUT_ALREADY_IN_USE(100001, "账号已注册"),
 
     ;
 

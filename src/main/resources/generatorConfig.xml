@@ -23,9 +23,9 @@
         <!-- JDBC连接 -->
         <jdbcConnection
                 driverClass="com.mysql.jdbc.Driver"
-                connectionURL="jdbc:mysql://xx.xx.xx.xx:3306/mblog"
+                connectionURL="jdbc:mysql://:3306/mblog"
                 userId="root"
-                password="xx">
+                password="">
         </jdbcConnection>
 
         <!-- 非必需，类型处理器，在数据库类型和java类型之间的转换控制-->
@@ -37,22 +37,22 @@
         </javaTypeResolver>
 
         <!-- 生成实体类地址 -->
-        <javaModelGenerator targetPackage="top.lajijson.mblog.generator.entity" targetProject="src/main/java">
-            <!-- 从数据库返回的值被清理前后的空格 -->
+        <javaModelGenerator targetPackage="top.lajijson.mblog.user.entity" targetProject="src/main/java">
+            <!--从数据库返回的值被清理前后的空格 -->
             <property name="trimStrings" value="true"/>
-            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <!--enableSubPackages:是否让schema作为包的后缀-->
             <property name="enableSubPackages" value="false"/>
         </javaModelGenerator>
 
         <!-- 生成mapper xml文件 -->
-        <sqlMapGenerator targetPackage="top.lajijson.mblog.generator.mapper" targetProject="src/main/java">
+        <sqlMapGenerator targetPackage="top.lajijson.mblog.user.mapper" targetProject="src/main/java">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
         <!-- 生成mapper xml对应Client-->
-        <javaClientGenerator targetPackage="top.lajijson.mblog.generator.dao" targetProject="src/main/java" type="XMLMAPPER">
-            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+        <javaClientGenerator targetPackage="top.lajijson.mblog.user.dao" targetProject="src/main/java" type="XMLMAPPER">
+            <!--enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
@@ -60,7 +60,7 @@
         <!-- schema即为数据库名 tableName为对应的数据库表 domainObjectName是要生成的实体类 enable*ByExample
             是否生成 example类 -->
 
-        <table schema="mblog" tableName="access_log"
+        <!--<table schema="mblog" tableName="access_log"
                domainObjectName="AccessLog" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
@@ -70,7 +70,7 @@
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
         </table>
-        <table schema="mblog" tableName="article_Info"
+        <table schema="mblog" tableName="article_info"
                domainObjectName="ArticleInfo" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
@@ -89,7 +89,7 @@
                domainObjectName="ReadLog" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
-        </table>
+        </table>-->
         <table schema="mblog" tableName="user"
                domainObjectName="User" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
