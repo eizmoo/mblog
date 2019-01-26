@@ -2,3 +2,17 @@ server:
   port: 8898
   servlet:
     context-path: /mblog
+
+spring:
+  datasource:
+    url: jdbc:mysql://47.98.149.60:3306/mblog?useUnicode=true&characterEncoding=utf-8&useSSL=true
+#    url: jdbc:mysql://47.98.149.60:3306/mblog
+    username: root
+    password: mmnb906
+    driver-class-name: com.mysql.jdbc.Driver
+    druid:
+      initial-size: 5
+
+mybatis:
+  type-aliases-package: top.lajijson.mblog.*.entity
+  mapper-locations: classpath:**/mapper/*.xml

@@ -14,14 +14,17 @@ public enum ResultEnum {
     /**
      * 未知异常
      */
-    FAIL(500,"未知异常"),
+    FAIL(500, "未知异常"),
 
     /**
      * 账号已注册
      */
-    ACCOUT_ALREADY_IN_USE(100001, "账号已注册"),
+    ACCOUNT_ALREADY_IN_USE(100001, "账号已注册"),
 
-    ;
+    /**
+     * 账号或密码错误
+     */
+    ACC_OR_PWD_ERROR(100002, "账号或密码错误");
 
     int code;
     String msg;

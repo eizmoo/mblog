@@ -1,8 +1,10 @@
 package top.lajijson.mblog;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@MapperScan("top.lajijson.mblog")
 @SpringBootApplication
 public class MblogApplication {
 

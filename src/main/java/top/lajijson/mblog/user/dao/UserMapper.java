@@ -20,4 +20,12 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     int queryCountByAccount(Map<String, Object> param);
+
+    /**
+     * 获取指定账户的用户信息
+     *
+     * @param param
+     * @return
+     */
+    User queryByAccount(Map<String, Object> param);
 }

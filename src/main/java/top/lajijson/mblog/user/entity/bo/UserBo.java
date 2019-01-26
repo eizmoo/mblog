@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank;
  */
 @Data
 @Accessors(chain = true)
-public class RegisterBo extends IpBo {
+public class UserBo extends IpBo {
 
     /**
      * 账户

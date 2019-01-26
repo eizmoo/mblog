@@ -34,6 +34,12 @@
         from user
         <include refid="conditions"/>
     </select>
+    <select id="queryByAccount" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        <include refid="conditions"/>
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete
         from user

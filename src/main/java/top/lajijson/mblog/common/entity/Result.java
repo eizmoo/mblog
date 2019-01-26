@@ -14,19 +14,19 @@ public class Result<T> {
     /**
      * 请求成功状态
      */
-    boolean success;
+    private boolean success;
     /**
      * 返回码
      */
-    int code;
+    private int code;
     /**
      * 返回消息
      */
-    String message;
+    private String message;
     /**
      * 数据
      */
-    T data;
+    private T data;
 
     private Result() {
     }
@@ -115,5 +115,37 @@ public class Result<T> {
      */
     public static Result failResult() {
         return new Result(ResultEnum.FAIL, false);
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
     }
 }
