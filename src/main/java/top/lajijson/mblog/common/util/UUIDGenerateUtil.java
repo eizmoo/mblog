@@ -1,6 +1,7 @@
 package top.lajijson.mblog.common.util;
 
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * 随机字符生成工具类
@@ -20,8 +21,8 @@ public class UUIDGenerateUtil {
      * @param length
      * @return
      */
-    public static String uuidGen(Integer length) {
-        StringBuffer builder = new StringBuffer();
+    public static String genCharacter(Integer length) {
+        StringBuilder builder = new StringBuilder();
 
         Random random = new Random();
 
@@ -33,11 +34,20 @@ public class UUIDGenerateUtil {
 
     /**
      * 生产8位
+     *
      * @return
      */
-    public static String uuidGen() {
-        return uuidGen(8);
+    public static String genCharacter() {
+        return genCharacter(8);
     }
 
 
+    /**
+     * 生成32位uuid，去除-
+     *
+     * @return
+     */
+    public static String genUUID() {
+        return UUID.randomUUID().toString().replace("-", "");
+    }
 }

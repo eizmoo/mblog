@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
         }
 
         //此次注册的盐
-        String salt = UUIDGenerateUtil.uuidGen();
+        String salt = UUIDGenerateUtil.genCharacter();
 
         //初始化user对象
         User user = new User().setAccount(userBo.getAccount())
@@ -79,7 +79,10 @@ public class UserServiceImpl implements UserService {
         if (user != null) {
             String password = calculatePassword(userBo.getPassword(), user.getSalt());
             if (password.equalsIgnoreCase(user.getPassword())) {
-                return Result.successResult();
+                //登录成功
+                String key = UUIDGenerateUtil.genUUID();
+                //TODO 保存信息到redis中，uuid为key，用户信息为value
+                return Result.successResult(key);
             }
         }
 
@@ -98,7 +101,7 @@ public class UserServiceImpl implements UserService {
         //一次加密，密码+系统内常量定义salt
         String once = DigestUtils.md5DigestAsHex((password + CommonConstant.REGISTER_SALT).getBytes());
         //二次加密，一次加密结果+随机salt
-        String twice = DigestUtils.md5DigestAsHex((password + salt).getBytes());
+        String twice = DigestUtils.md5DigestAsHex((once + salt).getBytes());
         return twice;
     }
 
@@ -108,7 +111,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     private String genNickName() {
-        return "u_" + UUIDGenerateUtil.uuidGen(10);
+        return "u_" + UUIDGenerateUtil.genCharacter(10);
     }
 
     /**
