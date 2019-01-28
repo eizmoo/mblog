@@ -27,7 +27,7 @@ public class UUIDGenerateUtil {
         Random random = new Random();
 
         for (int i = 0; i < length; i++) {
-            builder.append(origin.charAt(random.nextInt(63)));
+            builder.append(origin.charAt(random.nextInt(62)));
         }
         return builder.toString();
     }
