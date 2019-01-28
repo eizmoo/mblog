@@ -1,5 +1,6 @@
 package top.lajijson.mblog.user.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,6 +8,7 @@ import org.springframework.util.DigestUtils;
 import top.lajijson.mblog.common.constant.CommonConstant;
 import top.lajijson.mblog.common.entity.Result;
 import top.lajijson.mblog.common.enums.ResultEnum;
+import top.lajijson.mblog.common.util.RedissonUtil;
 import top.lajijson.mblog.common.util.UUIDGenerateUtil;
 import top.lajijson.mblog.user.dao.UserMapper;
 import top.lajijson.mblog.user.entity.User;
@@ -43,7 +45,7 @@ public class UserServiceImpl implements UserService {
         }
 
         //此次注册的盐
-        String salt = UUIDGenerateUtil.uuidGen();
+        String salt = UUIDGenerateUtil.gen();
 
         //初始化user对象
         User user = new User().setAccount(userBo.getAccount())
@@ -77,14 +79,33 @@ public class UserServiceImpl implements UserService {
 
         //如果存在该account，计算此account的密码与记录比较
         if (user != null) {
+            //计算密码
             String password = calculatePassword(userBo.getPassword(), user.getSalt());
-            if (password.equalsIgnoreCase(user.getPassword())) {
-                return Result.successResult();
+            if (password.equals(user.getPassword())) {
+                //用户信息正确，将用户信息存入redis
+                String key = saveUserInfoToRedis(user);
+                //返回用户信息redis的key
+                return Result.successResult(key);
             }
         }
 
         //不存在该账户或者密码不正确
         return Result.failResult(ResultEnum.ACC_OR_PWD_ERROR);
+    }
+
+    /**
+     * 用户信息保存到redis中
+     *
+     * @param user
+     */
+    private String saveUserInfoToRedis(User user) {
+        String redisKey = UUIDGenerateUtil.uuidGen();
+
+        user.setIp(null).setStatus(null).setUpdateTime(null);
+
+        RedissonUtil.setString(redisKey, JSON.toJSONString(user));
+
+        return redisKey;
     }
 
     /**
@@ -98,7 +119,7 @@ public class UserServiceImpl implements UserService {
         //一次加密，密码+系统内常量定义salt
         String once = DigestUtils.md5DigestAsHex((password + CommonConstant.REGISTER_SALT).getBytes());
         //二次加密，一次加密结果+随机salt
-        String twice = DigestUtils.md5DigestAsHex((password + salt).getBytes());
+        String twice = DigestUtils.md5DigestAsHex((once + salt).getBytes());
         return twice;
     }
 
@@ -108,7 +129,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     private String genNickName() {
-        return "u_" + UUIDGenerateUtil.uuidGen(10);
+        return "u_" + UUIDGenerateUtil.gen(10);
     }
 
     /**

@@ -3,6 +3,7 @@ package top.lajijson.mblog.common.util;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.HibernateValidator;
+import org.springframework.util.StringUtils;
 import top.lajijson.mblog.common.exception.ParamCheckException;
 
 import javax.validation.ConstraintViolation;
@@ -54,7 +55,7 @@ public class ConvertUtil {
 
         if (constraintViolations.size() != 0) {
             StringBuilder field = new StringBuilder();
-            constraintViolations.forEach(v -> field.append(v.getMessage()).append('&'));
+            constraintViolations.forEach(v -> field.append(v.getPropertyPath()).append(" ").append(v.getMessage()).append(" "));
             throw new ParamCheckException("参数有误：" + field.toString());
         }
     }

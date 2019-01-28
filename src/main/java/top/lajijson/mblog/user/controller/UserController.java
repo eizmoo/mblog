@@ -2,12 +2,11 @@ package top.lajijson.mblog.user.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import top.lajijson.mblog.common.entity.Result;
 import top.lajijson.mblog.common.util.ConvertUtil;
 import top.lajijson.mblog.common.util.IpUtil;
+import top.lajijson.mblog.common.util.RedissonUtil;
 import top.lajijson.mblog.user.dao.UserMapper;
 import top.lajijson.mblog.user.entity.bo.UserBo;
 import top.lajijson.mblog.user.service.UserService;
@@ -35,7 +34,7 @@ public class UserController {
      * @param request
      * @return
      */
-    @RequestMapping("/register")
+    @PostMapping("/register")
     public Result register(@RequestBody String json, HttpServletRequest request) {
         UserBo userBo = ConvertUtil.covertAndValidate(json, UserBo.class);
 
@@ -51,11 +50,17 @@ public class UserController {
      * @param json
      * @return
      */
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public Result login(@RequestBody String json) {
         UserBo userBo = ConvertUtil.covertAndValidate(json, UserBo.class);
 
         return userService.login(userBo);
+    }
+
+    @RequestMapping
+    public Result testRedis() {
+        RedissonUtil.getRedissonClient();
+        return Result.successResult();
     }
 
 }
