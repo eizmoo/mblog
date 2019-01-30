@@ -50,17 +50,11 @@ public class UserController {
      * @param json
      * @return
      */
-    @GetMapping("/login")
+    @PostMapping("/login")
     public Result login(@RequestBody String json) {
         UserBo userBo = ConvertUtil.covertAndValidate(json, UserBo.class);
 
         return userService.login(userBo);
-    }
-
-    @RequestMapping
-    public Result testRedis() {
-        RedissonUtil.getRedissonClient();
-        return Result.successResult();
     }
 
 }

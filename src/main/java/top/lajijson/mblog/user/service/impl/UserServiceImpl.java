@@ -18,6 +18,7 @@ import top.lajijson.mblog.user.service.UserService;
 import javax.validation.constraints.NotBlank;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 用户业务实现类
@@ -103,7 +104,8 @@ public class UserServiceImpl implements UserService {
 
         user.setIp(null).setStatus(null).setUpdateTime(null);
 
-        RedissonUtil.setString(redisKey, JSON.toJSONString(user));
+        //redis存活两小时
+        RedissonUtil.setString(redisKey, JSON.toJSONString(user), 2, TimeUnit.HOURS);
 
         return redisKey;
     }
@@ -139,7 +141,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     private boolean checkRegister(String account) {
-        Map<String, Object> param = new HashMap<>();
+        Map<String, Object> param = new HashMap<>(2);
         param.put("account", account);
         return userMapper.queryCountByAccount(param) != 0;
     }
