@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="top.lajijson.mblog.article.entity.ArticleContent" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="article_id" property="articleId" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="top.lajijson.mblog.article.entity.ArticleContentWithBLOBs" extends="BaseResultMap" >
     <result column="html" property="html" jdbcType="LONGVARCHAR" />

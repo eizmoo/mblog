@@ -1,7 +1,9 @@
 package top.lajijson.mblog.access.dao;
 
+import org.springframework.stereotype.Component;
 import top.lajijson.mblog.access.entity.AccessLog;
 
+@Component
 public interface AccessLogMapper {
     int deleteByPrimaryKey(Integer id);
 
