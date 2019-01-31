@@ -1,8 +1,7 @@
 package top.lajijson.mblog.article.entity.bo;
 
 import lombok.Data;
-import top.lajijson.mblog.user.entity.bo.UserBo;
-import top.lajijson.mblog.user.entity.bo.UserIdBo;
+import top.lajijson.mblog.user.entity.bo.LoginUserBo;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -13,7 +12,7 @@ import javax.validation.constraints.NotNull;
  * @author liuwei
  */
 @Data
-public class AddArticleBo extends UserIdBo {
+public class AddArticleBoLogin extends LoginUserBo {
 
     @NotBlank
     private String title;

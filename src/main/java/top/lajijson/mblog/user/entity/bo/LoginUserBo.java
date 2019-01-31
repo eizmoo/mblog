@@ -9,6 +9,6 @@ import lombok.Data;
  * @author liuwei
  */
 @Data
-public class UserIdBo {
+public class LoginUserBo {
     private Integer userId;
 }

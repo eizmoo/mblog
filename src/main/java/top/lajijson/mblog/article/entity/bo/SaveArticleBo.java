@@ -1,9 +1,9 @@
 package top.lajijson.mblog.article.entity.bo;
 
 import lombok.Data;
+import top.lajijson.mblog.user.entity.bo.LoginUserBo;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 /**
  * 保存文章bo
@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
  * @author liuwei
  */
 @Data
-public class SaveArticleBo {
+public class SaveArticleBo extends LoginUserBo {
 
     /**
      * 文章内容
@@ -22,8 +22,5 @@ public class SaveArticleBo {
     /**
      * 文章id
      */
-    @NotNull
     private Integer id;
-
-
 }

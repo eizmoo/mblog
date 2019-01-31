@@ -2,7 +2,7 @@ package top.lajijson.mblog.article.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import top.lajijson.mblog.article.entity.bo.AddArticleBo;
+import top.lajijson.mblog.article.entity.bo.AddArticleBoLogin;
 import top.lajijson.mblog.article.entity.bo.SaveArticleBo;
 import top.lajijson.mblog.article.entity.bo.ListArticleBo;
 import top.lajijson.mblog.article.service.ArticleService;
@@ -44,7 +44,7 @@ public class ArticleController {
      */
     @PutMapping("")
     public Result add(@RequestBody String json, @LoginUser User user) {
-        AddArticleBo addArticleBo = ConvertUtil.covertAndValidate(json, AddArticleBo.class);
+        AddArticleBoLogin addArticleBo = ConvertUtil.covertAndValidate(json, AddArticleBoLogin.class);
 
         //设置当前登录的用户id
         addArticleBo.setUserId(user.getId());
@@ -64,8 +64,12 @@ public class ArticleController {
      * @return
      */
     @PostMapping("/{id}/")
-    public Result save(@RequestBody String json, @LoginUser User user) {
+    public Result save(@RequestBody String json, @LoginUser User user, @PathVariable Integer id) {
         SaveArticleBo saveArticleBo = ConvertUtil.covertAndValidate(json, SaveArticleBo.class);
+
+        //设置当前登录的用户id
+        saveArticleBo.setUserId(user.getId());
+        saveArticleBo.setId(id);
 
         return articleService.save(saveArticleBo);
     }

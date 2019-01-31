@@ -73,14 +73,14 @@ public class SpringMvcWebInterceptor implements HandlerInterceptor {
         //token为空，返回登录失效
         if (StringUtils.isBlank(token)) {
             ResponseUtil.returnJson(response, Result.failResult(ResultEnum.LOGIN_STATUS_INVALID));
-            log.info("登录鉴权失败:: uri:{} ip:{} ");
+            log.info("登录鉴权失败:: uri:{} ip:{} ", uri, ip);
             return false;
         } else {
             //获取redis中的user信息
             String user = RedissonUtil.getString(token);
             if (StringUtils.isBlank(user)) {
                 ResponseUtil.returnJson(response, Result.failResult(ResultEnum.LOGIN_STATUS_INVALID));
-                log.info("登录鉴权失败:: uri:{} ip:{} ");
+                log.info("登录鉴权失败:: token:{} uri:{} ip:{} ", token, uri, ip);
                 return false;
             }
             //记录当前登录的用户id
@@ -88,8 +88,8 @@ public class SpringMvcWebInterceptor implements HandlerInterceptor {
         }
 
         //插入访问记录
-        // TODO 两小时记录一次访问记录
-        accessLogMapper.insertSelective(accessLog);
+        // TODO 一天记录一次访问记录
+//        accessLogMapper.insertSelective(accessLog);
 
         return true;
     }
