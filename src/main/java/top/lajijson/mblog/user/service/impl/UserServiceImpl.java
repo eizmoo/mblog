@@ -1,5 +1,6 @@
 package top.lajijson.mblog.user.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,6 +8,7 @@ import org.springframework.util.DigestUtils;
 import top.lajijson.mblog.common.constant.CommonConstant;
 import top.lajijson.mblog.common.entity.Result;
 import top.lajijson.mblog.common.enums.ResultEnum;
+import top.lajijson.mblog.common.util.RedissonUtil;
 import top.lajijson.mblog.common.util.UUIDGenerateUtil;
 import top.lajijson.mblog.user.dao.UserMapper;
 import top.lajijson.mblog.user.entity.User;
@@ -16,6 +18,7 @@ import top.lajijson.mblog.user.service.UserService;
 import javax.validation.constraints.NotBlank;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 用户业务实现类
@@ -43,7 +46,7 @@ public class UserServiceImpl implements UserService {
         }
 
         //此次注册的盐
-        String salt = UUIDGenerateUtil.genCharacter();
+        String salt = UUIDGenerateUtil.gen();
 
         //初始化user对象
         User user = new User().setAccount(userBo.getAccount())
@@ -77,17 +80,34 @@ public class UserServiceImpl implements UserService {
 
         //如果存在该account，计算此account的密码与记录比较
         if (user != null) {
+            //计算密码
             String password = calculatePassword(userBo.getPassword(), user.getSalt());
-            if (password.equalsIgnoreCase(user.getPassword())) {
-                //登录成功
-                String key = UUIDGenerateUtil.genUUID();
-                //TODO 保存信息到redis中，uuid为key，用户信息为value
+            if (password.equals(user.getPassword())) {
+                //用户信息正确，将用户信息存入redis
+                String key = saveUserInfoToRedis(user);
+                //返回用户信息redis的key
                 return Result.successResult(key);
             }
         }
 
         //不存在该账户或者密码不正确
         return Result.failResult(ResultEnum.ACC_OR_PWD_ERROR);
+    }
+
+    /**
+     * 用户信息保存到redis中
+     *
+     * @param user
+     */
+    private String saveUserInfoToRedis(User user) {
+        String redisKey = UUIDGenerateUtil.uuidGen();
+
+        user.setIp(null).setStatus(null).setUpdateTime(null);
+
+        //redis存活两小时
+        RedissonUtil.setString(redisKey, JSON.toJSONString(user), 2, TimeUnit.HOURS);
+
+        return redisKey;
     }
 
     /**
@@ -111,7 +131,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     private String genNickName() {
-        return "u_" + UUIDGenerateUtil.genCharacter(10);
+        return "u_" + UUIDGenerateUtil.gen(10);
     }
 
     /**
@@ -121,7 +141,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     private boolean checkRegister(String account) {
-        Map<String, Object> param = new HashMap<>();
+        Map<String, Object> param = new HashMap<>(2);
         param.put("account", account);
         return userMapper.queryCountByAccount(param) != 0;
     }

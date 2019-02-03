@@ -159,7 +159,7 @@
     </update>
 
     <sql id="conditions">
-        <trim prefix="where" suffixOverrides="and">
+        <trim prefix="where" prefixOverrides="and">
             <if test="account != null">
                 and account = #{account,jdbcType=VARCHAR}
             </if>

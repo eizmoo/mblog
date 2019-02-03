@@ -24,7 +24,14 @@ public enum ResultEnum {
     /**
      * 账号或密码错误
      */
-    ACC_OR_PWD_ERROR(100002, "账号或密码错误");
+    ACC_OR_PWD_ERROR(100002, "账号或密码错误"),
+
+    /**
+     * 未登录或登录失效
+     */
+    LOGIN_STATUS_INVALID(100003, "未登录或登录失效"),
+
+    ;
 
     int code;
     String msg;

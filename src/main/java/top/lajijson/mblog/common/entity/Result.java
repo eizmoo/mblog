@@ -1,5 +1,7 @@
 package top.lajijson.mblog.common.entity;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
 import top.lajijson.mblog.common.enums.ResultEnum;
 
 /**
@@ -8,7 +10,8 @@ import top.lajijson.mblog.common.enums.ResultEnum;
  * @param <T> 返回数据类型
  * @author liuwei
  */
-
+@Data
+@Accessors(chain = true)
 public class Result<T> {
 
     /**
@@ -109,43 +112,21 @@ public class Result<T> {
     }
 
     /**
+     * 失败
+     *
+     * @param msg
+     * @return
+     */
+    public static Result failResult(String msg) {
+        return failResult().setMessage(msg);
+    }
+
+    /**
      * 失败，默认返回值
      *
      * @return
      */
     public static Result failResult() {
         return new Result(ResultEnum.FAIL, false);
-    }
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
     }
 }

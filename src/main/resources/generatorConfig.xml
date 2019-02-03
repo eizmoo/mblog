@@ -64,13 +64,13 @@
                domainObjectName="AccessLog" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
-        </table>
+        </table>-->
         <table schema="mblog" tableName="article_content"
                domainObjectName="ArticleContent" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
         </table>
-        <table schema="mblog" tableName="article_info"
+        <!--<table schema="mblog" tableName="article_info"
                domainObjectName="ArticleInfo" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
@@ -89,11 +89,11 @@
                domainObjectName="ReadLog" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
-        </table>-->
+        </table>
         <table schema="mblog" tableName="user"
                domainObjectName="User" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
-        </table>
+        </table>-->
     </context>
 </generatorConfiguration>

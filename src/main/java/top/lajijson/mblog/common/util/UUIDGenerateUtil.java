@@ -21,33 +21,31 @@ public class UUIDGenerateUtil {
      * @param length
      * @return
      */
-    public static String genCharacter(Integer length) {
-        StringBuilder builder = new StringBuilder();
+    public static String gen(Integer length) {
+        StringBuffer builder = new StringBuffer();
 
         Random random = new Random();
 
         for (int i = 0; i < length; i++) {
-            builder.append(origin.charAt(random.nextInt(63)));
+            builder.append(origin.charAt(random.nextInt(62)));
         }
         return builder.toString();
     }
 
     /**
      * 生产8位
-     *
      * @return
      */
-    public static String genCharacter() {
-        return genCharacter(8);
+    public static String gen() {
+        return gen(8);
     }
-
 
     /**
-     * 生成32位uuid，去除-
-     *
+     * 生成uuid，去除-
      * @return
      */
-    public static String genUUID() {
+    public static String uuidGen() {
         return UUID.randomUUID().toString().replace("-", "");
     }
+
 }
