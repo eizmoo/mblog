@@ -121,8 +121,7 @@ public class UserServiceImpl implements UserService {
         //一次加密，密码+系统内常量定义salt
         String once = DigestUtils.md5DigestAsHex((password + CommonConstant.REGISTER_SALT).getBytes());
         //二次加密，一次加密结果+随机salt
-        String twice = DigestUtils.md5DigestAsHex((once + salt).getBytes());
-        return twice;
+        return DigestUtils.md5DigestAsHex((once + salt).getBytes());
     }
 
     /**

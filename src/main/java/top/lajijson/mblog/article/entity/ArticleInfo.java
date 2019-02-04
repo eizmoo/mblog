@@ -17,7 +17,7 @@ public class ArticleInfo {
 
     private String coverImg;
 
-    private Boolean status;
+    private Integer status;
 
     private Integer sort;
 
@@ -81,11 +81,11 @@ public class ArticleInfo {
         this.coverImg = coverImg == null ? null : coverImg.trim();
     }
 
-    public Boolean getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

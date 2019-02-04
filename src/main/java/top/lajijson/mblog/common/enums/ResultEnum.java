@@ -31,6 +31,10 @@ public enum ResultEnum {
      */
     LOGIN_STATUS_INVALID(100003, "未登录或登录失效"),
 
+    /**
+     * 同名标签
+     */
+    SAME_NAME_TYPE(300001, "同名标签"),
     ;
 
     int code;

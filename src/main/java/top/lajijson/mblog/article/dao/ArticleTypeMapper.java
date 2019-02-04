@@ -1,7 +1,10 @@
 package top.lajijson.mblog.article.dao;
 
+import org.springframework.stereotype.Component;
 import top.lajijson.mblog.article.entity.ArticleType;
+import top.lajijson.mblog.common.entity.Result;
 
+@Component
 public interface ArticleTypeMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +17,17 @@ public interface ArticleTypeMapper {
     int updateByPrimaryKeySelective(ArticleType record);
 
     int updateByPrimaryKey(ArticleType record);
+
+    /**
+     * 根据name查询type数量
+     * @param name
+     * @return
+     */
+    int queryCountByName(String name);
+
+    /**
+     * 查找全部
+     * @return
+     */
+    Result queryAll();
 }

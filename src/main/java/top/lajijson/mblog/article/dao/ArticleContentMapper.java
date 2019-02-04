@@ -3,6 +3,9 @@ package top.lajijson.mblog.article.dao;
 import org.springframework.stereotype.Component;
 import top.lajijson.mblog.article.entity.ArticleContent;
 import top.lajijson.mblog.article.entity.ArticleContentWithBLOBs;
+import top.lajijson.mblog.common.enums.ResultEnum;
+
+import java.util.List;
 
 @Component
 public interface ArticleContentMapper {
@@ -19,4 +22,18 @@ public interface ArticleContentMapper {
     int updateByPrimaryKeyWithBLOBs(ArticleContentWithBLOBs record);
 
     int updateByPrimaryKey(ArticleContent record);
+
+    /**
+     * 查询制定文章的html
+     * @param id
+     * @return
+     */
+    List<ArticleContentWithBLOBs> queryHtml(Integer id);
+
+    /**
+     * 查询制定文章的origin
+     * @param id
+     * @return
+     */
+    List<ArticleContentWithBLOBs> queryOrigin(Integer id);
 }

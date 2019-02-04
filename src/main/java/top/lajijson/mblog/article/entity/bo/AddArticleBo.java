@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
  * @author liuwei
  */
 @Data
-public class AddArticleBoLogin extends LoginUserBo {
+public class AddArticleBo extends LoginUserBo {
 
     @NotBlank
     private String title;

@@ -5,15 +5,17 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import top.lajijson.mblog.article.constant.ArticleEnum;
 import top.lajijson.mblog.article.dao.ArticleContentMapper;
 import top.lajijson.mblog.article.dao.ArticleInfoMapper;
 import top.lajijson.mblog.article.entity.ArticleContentWithBLOBs;
 import top.lajijson.mblog.article.entity.ArticleInfo;
-import top.lajijson.mblog.article.entity.bo.AddArticleBoLogin;
+import top.lajijson.mblog.article.entity.bo.AddArticleBo;
 import top.lajijson.mblog.article.entity.bo.ListArticleBo;
 import top.lajijson.mblog.article.entity.bo.SaveArticleBo;
 import top.lajijson.mblog.article.service.ArticleService;
 import top.lajijson.mblog.common.entity.Result;
+import top.lajijson.mblog.user.entity.User;
 
 import java.util.List;
 
@@ -38,7 +40,7 @@ public class ArticleServiceImpl implements ArticleService {
      * @return
      */
     @Override
-    public List<ArticleInfo> list(ListArticleBo listArticleBo) {
+    public Result<List<ArticleInfo>> list(ListArticleBo listArticleBo) {
 
 
         return null;
@@ -51,7 +53,7 @@ public class ArticleServiceImpl implements ArticleService {
      * @return
      */
     @Override
-    public Result add(AddArticleBoLogin addArticleBo) {
+    public Result add(AddArticleBo addArticleBo) {
         ArticleInfo articleInfo = new ArticleInfo();
         BeanUtils.copyProperties(addArticleBo, articleInfo);
 
@@ -80,4 +82,47 @@ public class ArticleServiceImpl implements ArticleService {
 
         return Result.successResult();
     }
+
+    /**
+     * 发布
+     *
+     * @param id
+     */
+    @Override
+    public void publish(Integer id) {
+        ArticleInfo articleInfo = new ArticleInfo();
+        articleInfo.setId(id);
+        //设为展示
+        articleInfo.setStatus(ArticleEnum.Status.DISPLAY.getCode());
+
+        //保存指定字段
+        articleInfoMapper.updateByPrimaryKeySelective(articleInfo);
+    }
+
+    /**
+     * 根据类型展示
+     *
+     * @param typeId
+     * @return
+     */
+    @Override
+    public Result listByType(Integer typeId) {
+        return Result.successResult(articleInfoMapper.queryByType(typeId));
+    }
+
+    @Override
+    public Result htmlContent(Integer id) {
+        return Result.successResult(articleContentMapper.queryHtml(id));
+    }
+
+    /**
+     * 根据类型展示
+     * @param id
+     * @return
+     */
+    @Override
+    public Result originContent(Integer id) {
+        return Result.successResult(articleContentMapper.queryOrigin(id));
+    }
+
 }

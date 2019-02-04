@@ -1,5 +1,6 @@
 package top.lajijson.mblog.article.entity;
 
+
 public class ArticleType {
     private Integer id;
 

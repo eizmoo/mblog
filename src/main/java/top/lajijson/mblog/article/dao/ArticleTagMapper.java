@@ -1,7 +1,9 @@
 package top.lajijson.mblog.article.dao;
 
+import org.springframework.stereotype.Component;
 import top.lajijson.mblog.article.entity.ArticleTag;
 
+@Component
 public interface ArticleTagMapper {
     int deleteByPrimaryKey(Integer id);
 
