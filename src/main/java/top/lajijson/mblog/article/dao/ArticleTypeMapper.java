@@ -4,6 +4,8 @@ import org.springframework.stereotype.Component;
 import top.lajijson.mblog.article.entity.ArticleType;
 import top.lajijson.mblog.common.entity.Result;
 
+import java.util.List;
+
 @Component
 public interface ArticleTypeMapper {
     int deleteByPrimaryKey(Integer id);
@@ -20,6 +22,7 @@ public interface ArticleTypeMapper {
 
     /**
      * 根据name查询type数量
+     *
      * @param name
      * @return
      */
@@ -27,7 +30,8 @@ public interface ArticleTypeMapper {
 
     /**
      * 查找全部
+     *
      * @return
      */
-    Result queryAll();
+    List<ArticleType> queryAll();
 }

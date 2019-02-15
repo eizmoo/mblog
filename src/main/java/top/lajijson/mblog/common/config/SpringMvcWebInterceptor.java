@@ -49,7 +49,7 @@ public class SpringMvcWebInterceptor implements HandlerInterceptor {
         // 访问的ip
         String ip = IpUtil.getRealIp(request);
 
-        log.info("----访问页面{}----访问ip{}", uri, ip);
+        log.info("----访问页面{} {}----访问ip{}", uri, request.getMethod(), ip);
 
         //记录访问ip
         AccessLog accessLog = new AccessLog();
@@ -93,4 +93,5 @@ public class SpringMvcWebInterceptor implements HandlerInterceptor {
 
         return true;
     }
+
 }

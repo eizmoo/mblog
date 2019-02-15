@@ -19,6 +19,5 @@ public class AddArticleTypeBo {
     @NotBlank
     private String name;
 
-    @NotBlank
     private String description;
 }

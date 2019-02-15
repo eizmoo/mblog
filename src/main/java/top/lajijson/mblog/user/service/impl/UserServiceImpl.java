@@ -18,6 +18,7 @@ import top.lajijson.mblog.user.service.UserService;
 import javax.validation.constraints.NotBlank;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 /**

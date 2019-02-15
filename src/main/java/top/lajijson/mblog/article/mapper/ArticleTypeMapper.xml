@@ -20,7 +20,7 @@
       from article_type
       where name = #{name,jdbcType=VARCHAR}
     </select>
-    <select id="queryAll" resultType="top.lajijson.mblog.common.entity.Result">
+    <select id="queryAll" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from article_type

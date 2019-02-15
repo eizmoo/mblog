@@ -10,6 +10,8 @@ import top.lajijson.mblog.article.service.ArticleTypeService;
 import top.lajijson.mblog.common.entity.Result;
 import top.lajijson.mblog.common.enums.ResultEnum;
 
+import java.util.List;
+
 /**
  * 文章类型服务实现类
  *
@@ -50,6 +52,6 @@ public class ArticleTypeServiceImpl implements ArticleTypeService {
      */
     @Override
     public Result list() {
-        return articleTypeMapper.queryAll();
+        return Result.successResult(articleTypeMapper.queryAll());
     }
 }
