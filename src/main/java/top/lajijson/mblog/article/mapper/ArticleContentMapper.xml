@@ -12,11 +12,11 @@
         <result column="origin" property="origin" jdbcType="LONGVARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, article_id
-  </sql>
+        id, article_id
+    </sql>
     <sql id="Blob_Column_List">
-    html, origin
-  </sql>
+        html, origin
+    </sql>
     <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -26,27 +26,27 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
     <select id="queryHtml" resultMap="ResultMapWithBLOBs">
-    select
-    ac.html
-    from article_content ac
-    where ac.article_id = #{id,jdbcType=INTEGER}
+        select ac.html
+        from article_content ac
+        where ac.article_id = #{id,jdbcType=INTEGER}
     </select>
     <select id="queryOrigin" resultMap="ResultMapWithBLOBs">
-    select
-    ac.origin
-    from article_content ac
-    where ac.article_id = #{id,jdbcType=INTEGER}
+        select ac.origin
+        from article_content ac
+        where ac.article_id = #{id,jdbcType=INTEGER}
+        limit 1
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from article_content
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+        delete
+        from article_content
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
     <insert id="insert" parameterType="top.lajijson.mblog.article.entity.ArticleContentWithBLOBs">
-    insert into article_content (id, article_id, html, 
-      origin)
-    values (#{id,jdbcType=INTEGER}, #{articleId,jdbcType=INTEGER}, #{html,jdbcType=LONGVARCHAR}, 
-      #{origin,jdbcType=LONGVARCHAR})
-  </insert>
+        insert into article_content (id, article_id, html,
+                                     origin)
+        values (#{id,jdbcType=INTEGER}, #{articleId,jdbcType=INTEGER}, #{html,jdbcType=LONGVARCHAR},
+                #{origin,jdbcType=LONGVARCHAR})
+    </insert>
     <insert id="insertSelective" parameterType="top.lajijson.mblog.article.entity.ArticleContentWithBLOBs">
         insert into article_content
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -94,15 +94,15 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="top.lajijson.mblog.article.entity.ArticleContentWithBLOBs">
-    update article_content
-    set article_id = #{articleId,jdbcType=INTEGER},
-      html = #{html,jdbcType=LONGVARCHAR},
-      origin = #{origin,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        update article_content
+        set article_id = #{articleId,jdbcType=INTEGER},
+            html       = #{html,jdbcType=LONGVARCHAR},
+            origin     = #{origin,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
     <update id="updateByPrimaryKey" parameterType="top.lajijson.mblog.article.entity.ArticleContent">
-    update article_content
-    set article_id = #{articleId,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        update article_content
+        set article_id = #{articleId,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

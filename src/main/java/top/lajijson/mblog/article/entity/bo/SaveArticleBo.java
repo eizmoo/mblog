@@ -23,4 +23,9 @@ public class SaveArticleBo extends LoginUserBo {
      * 文章id
      */
     private Integer id;
+
+    /**
+     * 文章标题
+     */
+    private String title;
 }

@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 public class BaseControllerResult<T> {
 
     /**
-     * 200
+     * 200 请求成功
      *
      * @param result
      * @return
@@ -22,11 +22,20 @@ public class BaseControllerResult<T> {
     }
 
     /**
-     * 204
+     * 204 请求成功无返回值
      *
      * @return
      */
     protected ResponseEntity<T> noContent() {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    /**
+     * 201 创建成功
+     *
+     * @return
+     */
+    protected ResponseEntity<T> created() {
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

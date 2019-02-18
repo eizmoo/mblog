@@ -1,5 +1,7 @@
 package top.lajijson.mblog.article.entity;
 
+import lombok.experimental.Accessors;
+
 import java.util.Date;
 
 public class ArticleInfo {

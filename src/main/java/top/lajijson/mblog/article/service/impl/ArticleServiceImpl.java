@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import top.lajijson.mblog.article.constant.ArticleEnum;
 import top.lajijson.mblog.article.dao.ArticleContentMapper;
 import top.lajijson.mblog.article.dao.ArticleInfoMapper;
+import top.lajijson.mblog.article.entity.ArticleContent;
 import top.lajijson.mblog.article.entity.ArticleContentWithBLOBs;
 import top.lajijson.mblog.article.entity.ArticleInfo;
 import top.lajijson.mblog.article.entity.bo.AddArticleBo;
@@ -15,7 +16,7 @@ import top.lajijson.mblog.article.entity.bo.ListArticleBo;
 import top.lajijson.mblog.article.entity.bo.SaveArticleBo;
 import top.lajijson.mblog.article.service.ArticleService;
 import top.lajijson.mblog.common.entity.Result;
-import top.lajijson.mblog.user.entity.User;
+import top.lajijson.mblog.common.util.DateUtil;
 
 import java.util.List;
 
@@ -53,15 +54,23 @@ public class ArticleServiceImpl implements ArticleService {
      * @return
      */
     @Override
-    public Result add(AddArticleBo addArticleBo) {
+    @Transactional(rollbackFor = Exception.class)
+    public void add(AddArticleBo addArticleBo) {
         ArticleInfo articleInfo = new ArticleInfo();
-        BeanUtils.copyProperties(addArticleBo, articleInfo);
 
+        articleInfo.setTitle(DateUtil.dateArticleTitle());
+        articleInfo.setArticleTypeId(addArticleBo.getType());
+        //设置默认时间标题
         log.info("新增文章:{}", articleInfo);
 
+        //新增文章
         articleInfoMapper.insertSelective(articleInfo);
 
-        return Result.successResult();
+        ArticleContentWithBLOBs articleContent = new ArticleContentWithBLOBs();
+        articleContent.setArticleId(articleInfo.getId());
+
+        //插入文章内容基本信息
+        articleContentMapper.insertSelective(articleContent);
     }
 
     /**
@@ -77,7 +86,7 @@ public class ArticleServiceImpl implements ArticleService {
         articleContentWithBLOBs.setOrigin(saveArticleBo.getContent());
         articleContentWithBLOBs.setId(saveArticleBo.getId());
 
-        //更新content表
+        //更新content
         articleContentMapper.updateByPrimaryKey(articleContentWithBLOBs);
 
         return Result.successResult();
@@ -110,6 +119,12 @@ public class ArticleServiceImpl implements ArticleService {
         return Result.successResult(articleInfoMapper.queryByType(typeId));
     }
 
+    /**
+     * 根据文章id获取文章html内容
+     *
+     * @param id
+     * @return
+     */
     @Override
     public Result htmlContent(Integer id) {
         return Result.successResult(articleContentMapper.queryHtml(id));
@@ -117,6 +132,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     /**
      * 根据类型展示
+     *
      * @param id
      * @return
      */

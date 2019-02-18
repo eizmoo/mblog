@@ -25,6 +25,7 @@ public interface ArticleContentMapper {
 
     /**
      * 查询制定文章的html
+     *
      * @param id
      * @return
      */
@@ -32,8 +33,9 @@ public interface ArticleContentMapper {
 
     /**
      * 查询制定文章的origin
+     *
      * @param id
      * @return
      */
-    List<ArticleContentWithBLOBs> queryOrigin(Integer id);
+    ArticleContentWithBLOBs queryOrigin(Integer id);
 }

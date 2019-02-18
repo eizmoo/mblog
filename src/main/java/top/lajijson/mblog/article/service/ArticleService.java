@@ -5,7 +5,6 @@ import top.lajijson.mblog.article.entity.bo.AddArticleBo;
 import top.lajijson.mblog.article.entity.bo.ListArticleBo;
 import top.lajijson.mblog.article.entity.bo.SaveArticleBo;
 import top.lajijson.mblog.common.entity.Result;
-import top.lajijson.mblog.user.entity.User;
 
 import java.util.List;
 
@@ -30,7 +29,7 @@ public interface ArticleService {
      * @param addArticleBo
      * @return
      */
-    Result add(AddArticleBo addArticleBo);
+    void add(AddArticleBo addArticleBo);
 
     /**
      * 保存文章

@@ -1,6 +1,9 @@
 package top.lajijson.mblog.article.entity;
 
 
+import lombok.ToString;
+
+@ToString
 public class ArticleType {
     private Integer id;
 

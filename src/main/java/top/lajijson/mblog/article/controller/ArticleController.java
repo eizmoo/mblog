@@ -45,32 +45,26 @@ public class ArticleController extends BaseControllerResult<Result> {
      * @return
      */
     @PostMapping("")
-    public ResponseEntity<Result> add(@RequestBody String json, @LoginUser User user) {
+    public ResponseEntity<Result> add(@RequestBody String json) {
         AddArticleBo addArticleBo = ConvertUtil.covertAndValidate(json, AddArticleBo.class);
-
-        //设置当前登录的用户id
-        addArticleBo.setUserId(user.getId());
-
-        return ok(articleService.add(addArticleBo));
+        articleService.add(addArticleBo);
+        return created();
     }
 
     /**
      * 保存文章
      * <p>
      * 编辑时，每次操作都会触发此接口
-     * 该接口将进行两步操作：
-     * 1、更新数据库article_info表记录
-     * 2、更新article_content记录
+     * 更新article_content记录
      *
      * @param json
      * @return 200
      */
-    @PostMapping("/{id}/")
-    public ResponseEntity<Result> save(@RequestBody String json, @LoginUser User user, @PathVariable Integer id) {
+    @PutMapping("/{id}/")
+    public ResponseEntity<Result> save(@RequestBody String json, @PathVariable Integer id) {
         SaveArticleBo saveArticleBo = ConvertUtil.covertAndValidate(json, SaveArticleBo.class);
 
         //设置当前登录的用户id
-        saveArticleBo.setUserId(user.getId());
         saveArticleBo.setId(id);
 
         return ok(articleService.save(saveArticleBo));

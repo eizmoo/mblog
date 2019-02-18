@@ -44,7 +44,8 @@
       #{coverImg,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, #{sort,jdbcType=INTEGER}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
-    <insert id="insertSelective" parameterType="top.lajijson.mblog.article.entity.ArticleInfo">
+    <insert id="insertSelective" parameterType="top.lajijson.mblog.article.entity.ArticleInfo"
+        useGeneratedKeys="true" keyProperty="id">
         insert into article_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
