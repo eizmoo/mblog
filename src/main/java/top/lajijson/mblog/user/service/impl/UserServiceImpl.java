@@ -16,6 +16,8 @@ import top.lajijson.mblog.user.entity.bo.UserBo;
 import top.lajijson.mblog.user.service.UserService;
 
 import javax.validation.constraints.NotBlank;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -120,7 +122,7 @@ public class UserServiceImpl implements UserService {
      */
     private String calculatePassword(@NotBlank String password, String salt) {
         //一次加密，密码+系统内常量定义salt
-        String once = DigestUtils.md5DigestAsHex((password + CommonConstant.REGISTER_SALT).getBytes());
+        String once = DigestUtils.md5DigestAsHex((password + CommonConstant.REGISTER_SALT).getBytes(StandardCharsets.UTF_8));
         //二次加密，一次加密结果+随机salt
         return DigestUtils.md5DigestAsHex((once + salt).getBytes());
     }

@@ -7,11 +7,9 @@ import top.lajijson.mblog.article.entity.bo.AddArticleBo;
 import top.lajijson.mblog.article.entity.bo.SaveArticleBo;
 import top.lajijson.mblog.article.entity.bo.ListArticleBo;
 import top.lajijson.mblog.article.service.ArticleService;
-import top.lajijson.mblog.common.annotation.LoginUser;
 import top.lajijson.mblog.common.base.BaseControllerResult;
 import top.lajijson.mblog.common.entity.Result;
 import top.lajijson.mblog.common.util.ConvertUtil;
-import top.lajijson.mblog.user.entity.User;
 
 /**
  * 文章控制器
