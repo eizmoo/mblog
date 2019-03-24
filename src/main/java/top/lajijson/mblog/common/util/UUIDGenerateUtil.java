@@ -22,7 +22,7 @@ public class UUIDGenerateUtil {
      * @return
      */
     public static String gen(Integer length) {
-        StringBuffer builder = new StringBuffer();
+        StringBuilder builder = new StringBuilder();
 
         Random random = new Random();
 

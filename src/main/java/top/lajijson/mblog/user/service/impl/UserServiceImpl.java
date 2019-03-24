@@ -64,8 +64,20 @@ public class UserServiceImpl implements UserService {
 
         userMapper.insertSelective(user);
 
-        //注册
+        //注册 root-pwd: mmnb
         return Result.successResult();
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        String targat = "fde4cf4d3b34444ae03cc91d2d2536ef";
+        String salt = "uxmHA03D";
+        while (true) {
+            if (new UserServiceImpl().calculatePassword(in.nextLine(), salt).equalsIgnoreCase(targat)) {
+                System.out.println("ding~");
+                return;
+            }
+        }
     }
 
     /**
