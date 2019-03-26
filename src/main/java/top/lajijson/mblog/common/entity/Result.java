@@ -1,6 +1,9 @@
 package top.lajijson.mblog.common.entity;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 import top.lajijson.mblog.common.enums.ResultEnum;
 
@@ -10,7 +13,8 @@ import top.lajijson.mblog.common.enums.ResultEnum;
  * @param <T> 返回数据类型
  * @author liuwei
  */
-@Data
+@Getter
+@Setter(AccessLevel.PRIVATE)
 @Accessors(chain = true)
 public class Result<T> {
 
