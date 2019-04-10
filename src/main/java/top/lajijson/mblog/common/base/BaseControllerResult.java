@@ -2,6 +2,7 @@ package top.lajijson.mblog.common.base;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 
 /**
  * 返回参数基本控制层
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
  * @param <T>
  * @author liuwei
  */
+@Component
 public class BaseControllerResult<T> {
 
     /**
@@ -17,7 +19,7 @@ public class BaseControllerResult<T> {
      * @param result
      * @return
      */
-    protected ResponseEntity<T> ok(T result) {
+    public ResponseEntity<T> ok(T result) {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
@@ -26,7 +28,7 @@ public class BaseControllerResult<T> {
      *
      * @return
      */
-    protected ResponseEntity<T> noContent() {
+    public ResponseEntity<T> noContent() {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
@@ -35,7 +37,15 @@ public class BaseControllerResult<T> {
      *
      * @return
      */
-    protected ResponseEntity<T> created() {
+    public ResponseEntity<T> created() {
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    public ResponseEntity<T> error(T result) {
+        return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    public ResponseEntity<T> error() {
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
