@@ -1,9 +1,6 @@
 package top.lajijson.mblog.common.entity;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.Accessors;
 import top.lajijson.mblog.common.enums.ResultEnum;
 
@@ -16,6 +13,7 @@ import top.lajijson.mblog.common.enums.ResultEnum;
 @Getter
 @Setter(AccessLevel.PRIVATE)
 @Accessors(chain = true)
+@ToString
 public class Result<T> {
 
     /**

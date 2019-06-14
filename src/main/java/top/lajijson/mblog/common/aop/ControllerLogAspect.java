@@ -1,7 +1,6 @@
 package top.lajijson.mblog.common.aop;
 
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -27,15 +26,10 @@ public class ControllerLogAspect {
     /**
      * 打印反参
      *
-     * @param joinPoint
      * @param result
      */
     @AfterReturning(pointcut = "myPointcut()", returning = "result")
-    public void after(JoinPoint joinPoint, Object result) {
-        String className = joinPoint.getTarget().getClass().getName();
-        String methodName = joinPoint.getSignature().getName();
-
-//        log.info("接口返回结果 ==>  class:[" + className + "], method:[" + methodName + "], paramters:[" + jsonResult + "]");
+    public void after(Object result) {
         log.info("----返回结果{}", result);
     }
 }

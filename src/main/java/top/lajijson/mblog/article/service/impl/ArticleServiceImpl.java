@@ -1,14 +1,12 @@
 package top.lajijson.mblog.article.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import top.lajijson.mblog.article.constant.ArticleEnum;
 import top.lajijson.mblog.article.dao.ArticleContentMapper;
 import top.lajijson.mblog.article.dao.ArticleInfoMapper;
-import top.lajijson.mblog.article.entity.ArticleContent;
 import top.lajijson.mblog.article.entity.ArticleContentWithBLOBs;
 import top.lajijson.mblog.article.entity.ArticleInfo;
 import top.lajijson.mblog.article.entity.bo.AddArticleBo;
@@ -58,7 +56,7 @@ public class ArticleServiceImpl implements ArticleService {
     public void add(AddArticleBo addArticleBo) {
         ArticleInfo articleInfo = new ArticleInfo();
 
-        articleInfo.setTitle(DateUtil.dateArticleTitle());
+        articleInfo.setTitle(DateUtil.nowDateString());
         articleInfo.setArticleTypeId(addArticleBo.getType());
         //设置默认时间标题
         log.info("新增文章:{}", articleInfo);

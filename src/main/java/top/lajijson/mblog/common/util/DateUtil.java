@@ -16,7 +16,7 @@ public class DateUtil {
      *
      * @return
      */
-    public static String dateArticleTitle() {
+    public static String nowDateString() {
         return LocalDateTime.now().toString();
     }
 }
